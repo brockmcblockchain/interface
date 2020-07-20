@@ -3,6 +3,7 @@ import KOVAN_TOKENS from './kovan'
 import MAINNET_TOKENS from './mainnet'
 import RINKEBY_TOKENS from './rinkeby'
 import ROPSTEN_TOKENS from './ropsten'
+import GOCHAIN_TOKENS from './gochain'
 
 type AllTokens = Readonly<{ [chainId in ChainId]: Readonly<{ [tokenAddress: string]: Token }> }>
 export const ALL_TOKENS: AllTokens = [
@@ -12,7 +13,8 @@ export const ALL_TOKENS: AllTokens = [
   ...MAINNET_TOKENS,
   ...RINKEBY_TOKENS,
   ...KOVAN_TOKENS,
-  ...ROPSTEN_TOKENS
+  ...ROPSTEN_TOKENS,
+  ...GOCHAIN_TOKENS
 ]
   // put into an object
   .reduce<AllTokens>(
@@ -31,6 +33,7 @@ export const ALL_TOKENS: AllTokens = [
       [ChainId.RINKEBY]: {},
       [ChainId.GÖRLI]: {},
       [ChainId.ROPSTEN]: {},
-      [ChainId.KOVAN]: {}
+      [ChainId.KOVAN]: {},
+      [ChainId.GOCHAIN]: {},
     }
   )
