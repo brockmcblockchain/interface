@@ -132,7 +132,7 @@ const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
   [ChainId.ROPSTEN]: 'Ropsten',
   [ChainId.GÖRLI]: 'Görli',
   [ChainId.KOVAN]: 'Kovan',
-  [ChainId.GOCHAIN]: 'Gochain'
+  [ChainId.GOCHAIN]: 'GoChain'
 }
 
 export default function Header() {
