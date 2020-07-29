@@ -37,8 +37,8 @@ function parseStringOrBytes32(str: string | undefined, bytes32: string | undefin
   return str && str.length > 0
     ? str
     : bytes32 && BYTES32_REGEX.test(bytes32)
-    ? parseBytes32String(bytes32)
-    : defaultValue
+      ? parseBytes32String(bytes32)
+      : defaultValue
 }
 
 // undefined if invalid or does not exist
@@ -95,7 +95,7 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 }
 
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
-  const isETH = currencyId?.toUpperCase() === 'ETH'
+  const isETH = currencyId?.toUpperCase() === 'GO'
   const token = useToken(isETH ? undefined : currencyId)
   return isETH ? ETHER : token
 }

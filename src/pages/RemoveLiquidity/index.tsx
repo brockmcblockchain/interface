@@ -80,8 +80,8 @@ export default function RemoveLiquidity({
     [Field.LIQUIDITY_PERCENT]: parsedAmounts[Field.LIQUIDITY_PERCENT].equalTo('0')
       ? '0'
       : parsedAmounts[Field.LIQUIDITY_PERCENT].lessThan(new Percent('1', '100'))
-      ? '<1'
-      : parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0),
+        ? '<1'
+        : parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0),
     [Field.LIQUIDITY]:
       independentField === Field.LIQUIDITY ? typedValue : parsedAmounts[Field.LIQUIDITY]?.toSignificant(6) ?? '',
     [Field.CURRENCY_A]:
@@ -410,7 +410,7 @@ export default function RemoveLiquidity({
 
   const pendingText = `Removing ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
     currencyA?.symbol
-  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencyB?.symbol}`
+    } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencyB?.symbol}`
 
   const liquidityPercentChangeCallback = useCallback(
     (value: number) => {
@@ -422,8 +422,8 @@ export default function RemoveLiquidity({
   const oneCurrencyIsETH = currencyA === ETHER || currencyB === ETHER
   const oneCurrencyIsWETH = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(WETH[chainId], currencyA)) ||
-        (currencyB && currencyEquals(WETH[chainId], currencyB)))
+    ((currencyA && currencyEquals(WETH[chainId], currencyA)) ||
+      (currencyB && currencyEquals(WETH[chainId], currencyB)))
   )
 
   const handleSelectCurrencyA = useCallback(
@@ -548,15 +548,15 @@ export default function RemoveLiquidity({
                           <StyledInternalLink
                             to={`/remove/${currencyA === ETHER ? WETH[chainId].address : currencyIdA}/${
                               currencyB === ETHER ? WETH[chainId].address : currencyIdB
-                            }`}
+                              }`}
                           >
                             Receive WETH
                           </StyledInternalLink>
                         ) : oneCurrencyIsWETH ? (
                           <StyledInternalLink
                             to={`/remove/${
-                              currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'ETH' : currencyIdA
-                            }/${currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'ETH' : currencyIdB}`}
+                              currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'GO' : currencyIdA
+                              }/${currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'GO' : currencyIdB}`}
                           >
                             Receive ETH
                           </StyledInternalLink>
@@ -626,9 +626,9 @@ export default function RemoveLiquidity({
                     1 {currencyB?.symbol} ={' '}
                     {tokenB
                       ? pair
-                          .priceOf(tokenB)
-                          .invert()
-                          .toSignificant(6)
+                        .priceOf(tokenB)
+                        .invert()
+                        .toSignificant(6)
                       : '-'}{' '}
                     {currencyA?.symbol}
                   </div>
@@ -639,36 +639,36 @@ export default function RemoveLiquidity({
               {!account ? (
                 <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
               ) : (
-                <RowBetween>
-                  <ButtonConfirmed
-                    onClick={onAttemptToApprove}
-                    confirmed={approval === ApprovalState.APPROVED || signatureData !== null}
-                    disabled={approval !== ApprovalState.NOT_APPROVED || signatureData !== null}
-                    mr="0.5rem"
-                    fontWeight={500}
-                    fontSize={16}
-                  >
-                    {approval === ApprovalState.PENDING ? (
-                      <Dots>Approving</Dots>
-                    ) : approval === ApprovalState.APPROVED || signatureData !== null ? (
-                      'Approved'
-                    ) : (
-                      'Approve'
-                    )}
-                  </ButtonConfirmed>
-                  <ButtonError
-                    onClick={() => {
-                      setShowConfirm(true)
-                    }}
-                    disabled={!isValid || (signatureData === null && approval !== ApprovalState.APPROVED)}
-                    error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
-                  >
-                    <Text fontSize={16} fontWeight={500}>
-                      {error || 'Remove'}
-                    </Text>
-                  </ButtonError>
-                </RowBetween>
-              )}
+                  <RowBetween>
+                    <ButtonConfirmed
+                      onClick={onAttemptToApprove}
+                      confirmed={approval === ApprovalState.APPROVED || signatureData !== null}
+                      disabled={approval !== ApprovalState.NOT_APPROVED || signatureData !== null}
+                      mr="0.5rem"
+                      fontWeight={500}
+                      fontSize={16}
+                    >
+                      {approval === ApprovalState.PENDING ? (
+                        <Dots>Approving</Dots>
+                      ) : approval === ApprovalState.APPROVED || signatureData !== null ? (
+                        'Approved'
+                      ) : (
+                            'Approve'
+                          )}
+                    </ButtonConfirmed>
+                    <ButtonError
+                      onClick={() => {
+                        setShowConfirm(true)
+                      }}
+                      disabled={!isValid || (signatureData === null && approval !== ApprovalState.APPROVED)}
+                      error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
+                    >
+                      <Text fontSize={16} fontWeight={500}>
+                        {error || 'Remove'}
+                      </Text>
+                    </ButtonError>
+                  </RowBetween>
+                )}
             </div>
           </AutoColumn>
         </Wrapper>

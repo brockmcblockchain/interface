@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Currency, Token } from '@uniswap/sdk'
 
-import EthereumLogo from '../../assets/images/ethereum-logo.png'
+const EthereumLogo = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/gochain/info/logo.png' // '../../assets/images/ethereum-logo.png'
 
 const getTokenLogoURL = address =>
   `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`

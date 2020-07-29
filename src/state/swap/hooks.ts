@@ -35,7 +35,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency instanceof Token ? currency.address : currency === ETHER ? 'ETH' : ''
+          currencyId: currency instanceof Token ? currency.address : currency === ETHER ? 'GO' : ''
         })
       )
     },
@@ -87,6 +87,7 @@ export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmo
   // necessary for all paths to return a value
   return
 }
+
 
 // from the current swap inputs, compute the best trade and return it.
 export function useDerivedSwapInfo(): {
@@ -172,8 +173,8 @@ export function useDerivedSwapInfo(): {
         ? slippageAdjustedAmountsV1[Field.INPUT]
         : null
       : slippageAdjustedAmounts
-      ? slippageAdjustedAmounts[Field.INPUT]
-      : null
+        ? slippageAdjustedAmounts[Field.INPUT]
+        : null
   ]
 
   if (balanceIn && amountIn && balanceIn.lessThan(amountIn)) {
@@ -194,10 +195,10 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'ETH') return 'ETH'
-    if (valid === false) return 'ETH'
+    if (urlParam.toUpperCase() === 'GO') return 'GO'
+    if (valid === false) return 'GO'
   }
-  return 'ETH' ?? ''
+  return 'GO' ?? ''
 }
 
 function parseTokenAmountURLParameter(urlParam: any): string {
