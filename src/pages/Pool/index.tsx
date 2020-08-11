@@ -21,6 +21,9 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks
 import AppBody from '../AppBody'
 import { Dots } from '../../components/swap/styleds'
 
+// import { ChainId, WETH, FACTORY_ADDRESS } from '@uniswap/sdk'
+
+
 export default function Pool() {
   const theme = useContext(ThemeContext)
   const { account } = useActiveWeb3React()
@@ -94,12 +97,12 @@ export default function Pool() {
                 ))}
               </>
             ) : (
-              <LightCard padding="40px">
-                <TYPE.body color={theme.text3} textAlign="center">
-                  No liquidity found.
+                    <LightCard padding="40px">
+                      <TYPE.body color={theme.text3} textAlign="center">
+                        No liquidity found.
                 </TYPE.body>
-              </LightCard>
-            )}
+                    </LightCard>
+                  )}
 
             <div>
               <Text textAlign="center" fontSize={14} style={{ padding: '.5rem 0 .5rem 0' }}>
