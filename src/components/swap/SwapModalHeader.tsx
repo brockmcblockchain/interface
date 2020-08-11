@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount } from '@uniswap/sdk'
+import { Currency, CurrencyAmount } from '@goswap/sdk'
 import React, { useContext } from 'react'
 import { ArrowDown } from 'react-feather'
 import { Text } from 'rebass'
@@ -65,14 +65,14 @@ export default function SwapModalHeader({
             {' or the transaction will revert.'}
           </TYPE.italic>
         ) : (
-          <TYPE.italic textAlign="left" style={{ width: '100%' }}>
-            {`Input is estimated. You will sell at most `}
-            <b>
-              {slippageAdjustedAmounts[Field.INPUT]?.toSignificant(6)} {currencies[Field.INPUT]?.symbol}
-            </b>
-            {' or the transaction will revert.'}
-          </TYPE.italic>
-        )}
+            <TYPE.italic textAlign="left" style={{ width: '100%' }}>
+              {`Input is estimated. You will sell at most `}
+              <b>
+                {slippageAdjustedAmounts[Field.INPUT]?.toSignificant(6)} {currencies[Field.INPUT]?.symbol}
+              </b>
+              {' or the transaction will revert.'}
+            </TYPE.italic>
+          )}
       </AutoColumn>
       {recipient !== null ? (
         <AutoColumn justify="flex-start" gap="sm" style={{ padding: '12px 0 0 0px' }}>

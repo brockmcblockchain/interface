@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, ETHER, WETH } from '@uniswap/sdk'
+import { Currency, currencyEquals, ETHER, WETH } from '@goswap/sdk'
 import { useMemo } from 'react'
 import { tryParseAmount } from '../state/swap/hooks'
 import { useTransactionAdder } from '../state/transactions/hooks'
@@ -42,9 +42,9 @@ export default function useWrapCallback(
         execute:
           sufficientBalance && inputAmount
             ? async () => {
-                const txReceipt = await wethContract.deposit({ value: `0x${inputAmount.raw.toString(16)}` })
-                addTransaction(txReceipt, { summary: `Wrap ${inputAmount.toSignificant(6)} ETH to WETH` })
-              }
+              const txReceipt = await wethContract.deposit({ value: `0x${inputAmount.raw.toString(16)}` })
+              addTransaction(txReceipt, { summary: `Wrap ${inputAmount.toSignificant(6)} ETH to WETH` })
+            }
             : undefined,
         error: sufficientBalance ? undefined : 'Insufficient ETH balance'
       }
@@ -54,9 +54,9 @@ export default function useWrapCallback(
         execute:
           sufficientBalance && inputAmount
             ? async () => {
-                const txReceipt = await wethContract.withdraw(`0x${inputAmount.raw.toString(16)}`)
-                addTransaction(txReceipt, { summary: `Unwrap ${inputAmount.toSignificant(6)} WETH to ETH` })
-              }
+              const txReceipt = await wethContract.withdraw(`0x${inputAmount.raw.toString(16)}`)
+              addTransaction(txReceipt, { summary: `Unwrap ${inputAmount.toSignificant(6)} WETH to ETH` })
+            }
             : undefined,
         error: sufficientBalance ? undefined : 'Insufficient WETH balance'
       }

@@ -1,5 +1,5 @@
 import { TransactionResponse } from '@ethersproject/abstract-provider'
-import { JSBI, Token, TokenAmount, WETH, Fraction, Percent } from '@uniswap/sdk'
+import { JSBI, Token, TokenAmount, WETH, Fraction, Percent } from '@goswap/sdk'
 import React, { useCallback, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import { Redirect, RouteComponentProps } from 'react-router'
@@ -120,7 +120,7 @@ function V1PairRemoval({
       <TYPE.darkGray style={{ textAlign: 'center' }}>
         {`Your Uniswap V1 ${
           token.equals(WETH[chainId]) ? 'WETH' : token.symbol
-        }/ETH liquidity will be redeemed for underlying assets.`}
+          }/ETH liquidity will be redeemed for underlying assets.`}
       </TYPE.darkGray>
     </AutoColumn>
   )
@@ -173,8 +173,8 @@ export default function RemoveV1Exchange({
             token={token}
           />
         ) : (
-          <EmptyState message="Loading..." />
-        )}
+              <EmptyState message="Loading..." />
+            )}
       </AutoColumn>
     </BodyWrapper>
   )

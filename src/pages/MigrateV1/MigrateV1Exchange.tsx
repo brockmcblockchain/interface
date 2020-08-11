@@ -1,6 +1,6 @@
 import { TransactionResponse } from '@ethersproject/abstract-provider'
 import { AddressZero } from '@ethersproject/constants'
-import { Currency, Fraction, JSBI, Percent, Token, TokenAmount, WETH } from '@uniswap/sdk'
+import { Currency, Fraction, JSBI, Percent, Token, TokenAmount, WETH } from '@goswap/sdk'
 import React, { useCallback, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import { Redirect, RouteComponentProps } from 'react-router'
@@ -41,8 +41,8 @@ function FormattedPoolTokenAmount({ tokenAmount }: { tokenAmount: TokenAmount })
       {tokenAmount.equalTo(JSBI.BigInt(0))
         ? '0'
         : tokenAmount.greaterThan(POOL_TOKEN_AMOUNT_MIN)
-        ? tokenAmount.toSignificant(4)
-        : `<${POOL_TOKEN_AMOUNT_MIN.toSignificant(1)}`}
+          ? tokenAmount.toSignificant(4)
+          : `<${POOL_TOKEN_AMOUNT_MIN.toSignificant(1)}`}
     </>
   )
 }
@@ -132,9 +132,9 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
   const priceDifferenceFraction: Fraction | undefined =
     v1SpotPrice && v2SpotPrice
       ? v1SpotPrice
-          .divide(v2SpotPrice)
-          .multiply('100')
-          .subtract('100')
+        .divide(v2SpotPrice)
+        .multiply('100')
+        .subtract('100')
       : undefined
 
   const priceDifferenceAbs: Fraction | undefined = priceDifferenceFraction?.lessThan(ZERO)
@@ -144,17 +144,17 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
   const minAmountETH: JSBI | undefined =
     v2SpotPrice && tokenWorth
       ? tokenWorth
-          .divide(v2SpotPrice)
-          .multiply(WEI_DENOM)
-          .multiply(ALLOWED_OUTPUT_MIN_PERCENT).quotient
+        .divide(v2SpotPrice)
+        .multiply(WEI_DENOM)
+        .multiply(ALLOWED_OUTPUT_MIN_PERCENT).quotient
       : ethWorth?.numerator
 
   const minAmountToken: JSBI | undefined =
     v2SpotPrice && ethWorth
       ? ethWorth
-          .multiply(v2SpotPrice)
-          .multiply(JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(token.decimals)))
-          .multiply(ALLOWED_OUTPUT_MIN_PERCENT).quotient
+        .multiply(v2SpotPrice)
+        .multiply(JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(token.decimals)))
+        .multiply(ALLOWED_OUTPUT_MIN_PERCENT).quotient
       : tokenWorth?.numerator
 
   const addTransaction = useTransactionAdder()
@@ -292,8 +292,8 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
               ) : approval === ApprovalState.APPROVED ? (
                 'Approved'
               ) : (
-                'Approve'
-              )}
+                    'Approve'
+                  )}
             </ButtonConfirmed>
           </AutoColumn>
           <AutoColumn gap="12px" style={{ flex: '1' }}>
@@ -380,8 +380,8 @@ export default function MigrateV1Exchange({
         ) : userLiquidityBalance && token ? (
           <V1PairMigration liquidityTokenAmount={userLiquidityBalance} token={token} />
         ) : (
-          <EmptyState message="Loading..." />
-        )}
+                <EmptyState message="Loading..." />
+              )}
       </AutoColumn>
     </BodyWrapper>
   )

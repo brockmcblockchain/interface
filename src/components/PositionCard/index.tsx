@@ -1,4 +1,4 @@
-import { JSBI, Pair, Percent } from '@uniswap/sdk'
+import { JSBI, Pair, Percent } from '@goswap/sdk'
 import { darken } from 'polished'
 import React, { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
@@ -51,14 +51,14 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
 
   const [token0Deposited, token1Deposited] =
     !!pair &&
-    !!totalPoolTokens &&
-    !!userPoolBalance &&
-    // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
-    JSBI.greaterThanOrEqual(totalPoolTokens.raw, userPoolBalance.raw)
+      !!totalPoolTokens &&
+      !!userPoolBalance &&
+      // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
+      JSBI.greaterThanOrEqual(totalPoolTokens.raw, userPoolBalance.raw)
       ? [
-          pair.getLiquidityValue(pair.token0, totalPoolTokens, userPoolBalance, false),
-          pair.getLiquidityValue(pair.token1, totalPoolTokens, userPoolBalance, false)
-        ]
+        pair.getLiquidityValue(pair.token0, totalPoolTokens, userPoolBalance, false),
+        pair.getLiquidityValue(pair.token1, totalPoolTokens, userPoolBalance, false)
+      ]
       : [undefined, undefined]
 
   return (
@@ -98,8 +98,8 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
                     </Text>
                   </RowFixed>
                 ) : (
-                  '-'
-                )}
+                    '-'
+                  )}
               </FixedHeightRow>
               <FixedHeightRow>
                 <Text color="#888D9B" fontSize={16} fontWeight={500}>
@@ -112,8 +112,8 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
                     </Text>
                   </RowFixed>
                 ) : (
-                  '-'
-                )}
+                    '-'
+                  )}
               </FixedHeightRow>
             </AutoColumn>
           </AutoColumn>
@@ -141,14 +141,14 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
 
   const [token0Deposited, token1Deposited] =
     !!pair &&
-    !!totalPoolTokens &&
-    !!userPoolBalance &&
-    // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
-    JSBI.greaterThanOrEqual(totalPoolTokens.raw, userPoolBalance.raw)
+      !!totalPoolTokens &&
+      !!userPoolBalance &&
+      // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
+      JSBI.greaterThanOrEqual(totalPoolTokens.raw, userPoolBalance.raw)
       ? [
-          pair.getLiquidityValue(pair.token0, totalPoolTokens, userPoolBalance, false),
-          pair.getLiquidityValue(pair.token1, totalPoolTokens, userPoolBalance, false)
-        ]
+        pair.getLiquidityValue(pair.token0, totalPoolTokens, userPoolBalance, false),
+        pair.getLiquidityValue(pair.token1, totalPoolTokens, userPoolBalance, false)
+      ]
       : [undefined, undefined]
 
   return (
@@ -165,8 +165,8 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
             {showMore ? (
               <ChevronUp size="20" style={{ marginLeft: '10px' }} />
             ) : (
-              <ChevronDown size="20" style={{ marginLeft: '10px' }} />
-            )}
+                <ChevronDown size="20" style={{ marginLeft: '10px' }} />
+              )}
           </RowFixed>
         </FixedHeightRow>
         {showMore && (
@@ -185,8 +185,8 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
                   <CurrencyLogo size="20px" style={{ marginLeft: '8px' }} currency={currency0} />
                 </RowFixed>
               ) : (
-                '-'
-              )}
+                  '-'
+                )}
             </FixedHeightRow>
 
             <FixedHeightRow>
@@ -203,8 +203,8 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
                   <CurrencyLogo size="20px" style={{ marginLeft: '8px' }} currency={currency1} />
                 </RowFixed>
               ) : (
-                '-'
-              )}
+                  '-'
+                )}
             </FixedHeightRow>
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>

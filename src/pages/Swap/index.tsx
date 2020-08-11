@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI } from '@uniswap/sdk'
+import { CurrencyAmount, JSBI } from '@goswap/sdk'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { ArrowDown } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -75,26 +75,26 @@ export default function Swap() {
   const trade = showWrap
     ? undefined
     : {
-        [Version.v1]: v1Trade,
-        [Version.v2]: v2Trade
-      }[toggledVersion]
+      [Version.v1]: v1Trade,
+      [Version.v2]: v2Trade
+    }[toggledVersion]
 
   const betterTradeLinkVersion: Version | undefined =
     toggledVersion === Version.v2 && isTradeBetter(v2Trade, v1Trade, BETTER_TRADE_LINK_THRESHOLD)
       ? Version.v1
       : toggledVersion === Version.v1 && isTradeBetter(v1Trade, v2Trade)
-      ? Version.v2
-      : undefined
+        ? Version.v2
+        : undefined
 
   const parsedAmounts = showWrap
     ? {
-        [Field.INPUT]: parsedAmount,
-        [Field.OUTPUT]: parsedAmount
-      }
+      [Field.INPUT]: parsedAmount,
+      [Field.OUTPUT]: parsedAmount
+    }
     : {
-        [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
-        [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount
-      }
+      [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
+      [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount
+    }
 
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
   const isValid = !error
@@ -173,8 +173,8 @@ export default function Swap() {
             recipient === null
               ? 'Swap w/o Send'
               : (recipientAddress ?? recipient) === account
-              ? 'Swap w/o Send + recipient'
-              : 'Swap w/ Send',
+                ? 'Swap w/o Send + recipient'
+                : 'Swap w/ Send',
           label: [
             trade?.inputAmount?.currency?.symbol,
             trade?.outputAmount?.currency?.symbol,
@@ -239,7 +239,7 @@ export default function Swap() {
   // text to show while loading
   const pendingText = `Swapping ${parsedAmounts[Field.INPUT]?.toSignificant(6)} ${
     currencies[Field.INPUT]?.symbol
-  } for ${parsedAmounts[Field.OUTPUT]?.toSignificant(6)} ${currencies[Field.OUTPUT]?.symbol}`
+    } for ${parsedAmounts[Field.OUTPUT]?.toSignificant(6)} ${currencies[Field.OUTPUT]?.symbol}`
 
   return (
     <>
@@ -383,8 +383,8 @@ export default function Swap() {
                   ) : approvalSubmitted && approval === ApprovalState.APPROVED ? (
                     'Approved'
                   ) : (
-                    'Approve ' + currencies[Field.INPUT]?.symbol
-                  )}
+                        'Approve ' + currencies[Field.INPUT]?.symbol
+                      )}
                 </ButtonPrimary>
                 <ButtonError
                   onClick={() => {
@@ -403,23 +403,23 @@ export default function Swap() {
                 </ButtonError>
               </RowBetween>
             ) : (
-              <ButtonError
-                onClick={() => {
-                  expertMode ? onSwap() : setShowConfirm(true)
-                }}
-                id="swap-button"
-                disabled={!isValid || (priceImpactSeverity > 3 && !expertMode)}
-                error={isValid && priceImpactSeverity > 2}
-              >
-                <Text fontSize={20} fontWeight={500}>
-                  {error
-                    ? error
-                    : priceImpactSeverity > 3 && !expertMode
-                    ? `Price Impact Too High`
-                    : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
-                </Text>
-              </ButtonError>
-            )}
+                      <ButtonError
+                        onClick={() => {
+                          expertMode ? onSwap() : setShowConfirm(true)
+                        }}
+                        id="swap-button"
+                        disabled={!isValid || (priceImpactSeverity > 3 && !expertMode)}
+                        error={isValid && priceImpactSeverity > 2}
+                      >
+                        <Text fontSize={20} fontWeight={500}>
+                          {error
+                            ? error
+                            : priceImpactSeverity > 3 && !expertMode
+                              ? `Price Impact Too High`
+                              : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
+                        </Text>
+                      </ButtonError>
+                    )}
             {betterTradeLinkVersion && <BetterTradeLink version={betterTradeLinkVersion} />}
           </BottomGrouping>
         </Wrapper>

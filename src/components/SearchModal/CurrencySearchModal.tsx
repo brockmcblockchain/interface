@@ -1,4 +1,4 @@
-import { Currency, Token } from '@uniswap/sdk'
+import { Currency, Token } from '@goswap/sdk'
 import React, { KeyboardEvent, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -57,8 +57,8 @@ export default function CurrencySearchModal({
   const allTokenBalances_ = useAllTokenBalances()
   const allTokenBalances = searchToken
     ? {
-        [searchToken.address]: searchTokenBalance
-      }
+      [searchToken.address]: searchTokenBalance
+    }
     : allTokenBalances_ ?? {}
 
   const tokenComparator = useTokenComparator(invertSearchOrder)

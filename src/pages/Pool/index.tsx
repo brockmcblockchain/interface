@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react'
 import { ThemeContext } from 'styled-components'
-import { Pair } from '@uniswap/sdk'
+import { Pair } from '@goswap/sdk'
 import { Link } from 'react-router-dom'
 import { SwapPoolTabs } from '../../components/NavigationTabs'
 
@@ -21,7 +21,7 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks
 import AppBody from '../AppBody'
 import { Dots } from '../../components/swap/styleds'
 
-// import { ChainId, WETH, FACTORY_ADDRESS } from '@uniswap/sdk'
+// import { ChainId, WETH, FACTORY_ADDRESS } from '@goswap/sdk'
 
 
 export default function Pool() {

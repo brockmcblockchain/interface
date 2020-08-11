@@ -1,4 +1,4 @@
-import { CurrencyAmount, Percent, Trade, TradeType } from '@uniswap/sdk'
+import { CurrencyAmount, Percent, Trade, TradeType } from '@goswap/sdk'
 import React, { useContext } from 'react'
 import { Repeat } from 'react-feather'
 import { Text } from 'rebass'

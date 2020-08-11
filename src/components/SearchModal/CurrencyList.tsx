@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, ETHER, JSBI, Token } from '@uniswap/sdk'
+import { Currency, CurrencyAmount, currencyEquals, ETHER, JSBI, Token } from '@goswap/sdk'
 import React, { CSSProperties, memo, useContext, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
@@ -109,14 +109,14 @@ export default function CurrencyList({
                 ) : balance ? (
                   balance.toSignificant(6)
                 ) : (
-                  '-'
-                )}
+                      '-'
+                    )}
               </Text>
             ) : account ? (
               <Loader />
             ) : (
-              '-'
-            )}
+                  '-'
+                )}
           </AutoColumn>
         </MenuItem>
       )

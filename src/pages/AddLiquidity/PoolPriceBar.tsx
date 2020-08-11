@@ -1,4 +1,4 @@
-import { Currency, Fraction, Percent } from '@uniswap/sdk'
+import { Currency, Fraction, Percent } from '@goswap/sdk'
 import React, { useContext } from 'react'
 import { Text } from 'rebass'
 import { ThemeContext } from 'styled-components'

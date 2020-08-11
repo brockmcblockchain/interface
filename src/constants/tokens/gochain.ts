@@ -1,4 +1,4 @@
-import { Token, ChainId } from '@uniswap/sdk'
+import { Token, ChainId } from '@goswap/sdk'
 
 export default [
     new Token(ChainId.GOCHAIN, '0x97a19aD887262d7Eca45515814cdeF75AcC4f713', 18, 'USDC', 'USDC'),
