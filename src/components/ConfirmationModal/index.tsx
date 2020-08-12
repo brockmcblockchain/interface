@@ -30,7 +30,7 @@ const ConfirmedIcon = styled(ColumnCenter)`
   padding: 60px 0;
 `
 
-const CustomLightSpinner = styled(Spinner)<{ size: string }>`
+const CustomLightSpinner = styled(Spinner) <{ size: string }>`
   height: ${({ size }) => size};
   width: ${({ size }) => size};
 `
@@ -75,8 +75,8 @@ export default function ConfirmationModal({
               {transactionBroadcast ? (
                 <ArrowUpCircle strokeWidth={0.5} size={90} color={theme.primary1} />
               ) : (
-                <CustomLightSpinner src={Circle} alt="loader" size={'90px'} />
-              )}
+                  <CustomLightSpinner src={Circle} alt="loader" size={'90px'} />
+                )}
             </ConfirmedIcon>
             <AutoColumn gap="12px" justify={'center'}>
               <Text fontWeight={500} fontSize={20}>
@@ -92,7 +92,7 @@ export default function ConfirmationModal({
                 <>
                   <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>
                     <Text fontWeight={500} fontSize={14} color={theme.primary1}>
-                      View on Etherscan
+                      View on Explorer
                     </Text>
                   </ExternalLink>
                   <ButtonPrimary onClick={onDismiss} style={{ margin: '20px 0 0 0' }}>
@@ -102,10 +102,10 @@ export default function ConfirmationModal({
                   </ButtonPrimary>
                 </>
               ) : (
-                <Text fontSize={12} color="#565A69" textAlign="center">
-                  Confirm this transaction in your wallet
-                </Text>
-              )}
+                  <Text fontSize={12} color="#565A69" textAlign="center">
+                    Confirm this transaction in your wallet
+                  </Text>
+                )}
             </AutoColumn>
           </Section>
         </Wrapper>

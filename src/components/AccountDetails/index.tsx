@@ -131,7 +131,7 @@ const AccountControl = styled.div`
   }
 `
 
-const AddressLink = styled(ExternalLink)<{ hasENS: boolean; isENS: boolean }>`
+const AddressLink = styled(ExternalLink) <{ hasENS: boolean; isENS: boolean }>`
   font-size: 0.825rem;
   color: ${({ theme }) => theme.text3};
   margin-left: 1rem;
@@ -309,7 +309,7 @@ export default function AccountDetails({
                     <WalletAction
                       style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
                       onClick={() => {
-                        ;(connector as any).close()
+                        ; (connector as any).close()
                       }}
                     >
                       Disconnect
@@ -335,13 +335,13 @@ export default function AccountDetails({
                       </div>
                     </>
                   ) : (
-                    <>
-                      <div>
-                        {getStatusIcon()}
-                        <p> {shortenAddress(account)}</p>
-                      </div>
-                    </>
-                  )}
+                      <>
+                        <div>
+                          {getStatusIcon()}
+                          <p> {shortenAddress(account)}</p>
+                        </div>
+                      </>
+                    )}
                 </AccountControl>
               </AccountGroupingRow>
               <AccountGroupingRow>
@@ -358,30 +358,30 @@ export default function AccountDetails({
                           href={getEtherscanLink(chainId, ENSName, 'address')}
                         >
                           <LinkIcon size={16} />
-                          <span style={{ marginLeft: '4px' }}>View on Etherscan</span>
+                          <span style={{ marginLeft: '4px' }}>View on Explorer</span>
                         </AddressLink>
                       </div>
                     </AccountControl>
                   </>
                 ) : (
-                  <>
-                    <AccountControl>
-                      <div>
-                        <Copy toCopy={account}>
-                          <span style={{ marginLeft: '4px' }}>Copy Address</span>
-                        </Copy>
-                        <AddressLink
-                          hasENS={!!ENSName}
-                          isENS={false}
-                          href={getEtherscanLink(chainId, account, 'address')}
-                        >
-                          <LinkIcon size={16} />
-                          <span style={{ marginLeft: '4px' }}>View on Etherscan</span>
-                        </AddressLink>
-                      </div>
-                    </AccountControl>
-                  </>
-                )}
+                    <>
+                      <AccountControl>
+                        <div>
+                          <Copy toCopy={account}>
+                            <span style={{ marginLeft: '4px' }}>Copy Address</span>
+                          </Copy>
+                          <AddressLink
+                            hasENS={!!ENSName}
+                            isENS={false}
+                            href={getEtherscanLink(chainId, account, 'address')}
+                          >
+                            <LinkIcon size={16} />
+                            <span style={{ marginLeft: '4px' }}>View on Explorer</span>
+                          </AddressLink>
+                        </div>
+                      </AccountControl>
+                    </>
+                  )}
                 {/* {formatConnectorName()} */}
               </AccountGroupingRow>
             </InfoCard>
@@ -398,10 +398,10 @@ export default function AccountDetails({
           {renderTransactions(confirmedTransactions)}
         </LowerSection>
       ) : (
-        <LowerSection>
-          <TYPE.body color={theme.text1}>Your transactions will appear here...</TYPE.body>
-        </LowerSection>
-      )}
+          <LowerSection>
+            <TYPE.body color={theme.text1}>Your transactions will appear here...</TYPE.body>
+          </LowerSection>
+        )}
     </>
   )
 }
