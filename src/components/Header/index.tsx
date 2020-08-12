@@ -5,10 +5,9 @@ import { Text } from 'rebass'
 
 import styled from 'styled-components'
 
-import Logo from '../../assets/svg/logo.svg'
-import LogoDark from '../../assets/svg/logo_white.svg'
-import Wordmark from '../../assets/svg/wordmark.svg'
-import WordmarkDark from '../../assets/svg/wordmark_white.svg'
+import Logo from '../../assets/images/goswap-logo.png'
+import LogoDark from '../../assets/images/goswap-logo.png'
+
 import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
@@ -103,9 +102,11 @@ const UniIcon = styled.div`
   }
   ${({ theme }) => theme.mediaWidth.upToSmall`
     img { 
-      width: 4.5rem;
+      width: 100px;
     }
   `};
+ 
+  
 `
 
 const HeaderControls = styled.div`
@@ -146,11 +147,11 @@ export default function Header() {
         <HeaderElement>
           <Title href=".">
             <UniIcon>
-              <img src={isDark ? LogoDark : Logo} alt="logo" />
+              <img src={isDark ? LogoDark : Logo} style={{ width: 120 }} alt="logo" />
             </UniIcon>
-            <TitleText>
+            {/* <TitleText>
               <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
-            </TitleText>
+            </TitleText> */}
           </Title>
         </HeaderElement>
         <HeaderControls>

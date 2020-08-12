@@ -47,7 +47,7 @@ import { ClickableText } from '../Pool/styleds'
 export default function Swap() {
   useDefaultsFromURLSearch()
 
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const theme = useContext(ThemeContext)
 
   // toggle wallet when disconnected
@@ -241,6 +241,15 @@ export default function Swap() {
     currencies[Field.INPUT]?.symbol
     } for ${parsedAmounts[Field.OUTPUT]?.toSignificant(6)} ${currencies[Field.OUTPUT]?.symbol}`
 
+
+  console.log("chainId:", chainId);
+  if (chainId !== 60) {
+    return (
+      <div>
+        Please configure your wallet for GoChain. <a href="https://gofs-help.gochain.io/metamask" target="_blank">Click here for instructions</a >.
+      </div>
+    )
+  }
   return (
     <>
       <TokenWarningCards currencies={currencies} />
