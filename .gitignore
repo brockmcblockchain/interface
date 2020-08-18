@@ -36,3 +36,5 @@ cypress/fixtures/example.json
 /.firebase
 .firebaserc
 firebase.json
+
+*.code-workspace
