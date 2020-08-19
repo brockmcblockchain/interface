@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Currency, Token } from '@goswap/sdk'
 
-const EthereumLogo = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/gochain/info/logo.png'
+const EthereumLogo = 'https://raw.githubusercontent.com/goswap/cryptocurrency-icons/master/128/color/go.png'
+//'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/gochain/info/logo.png'
 
 const getLogoByName = name =>
   `https://raw.githubusercontent.com/goswap/cryptocurrency-icons/master/128/color/${name.toLowerCase()}.png`
