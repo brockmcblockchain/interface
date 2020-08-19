@@ -2,10 +2,14 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Currency, Token } from '@goswap/sdk'
 
-const EthereumLogo = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/gochain/info/logo.png' // '../../assets/images/ethereum-logo.png'
+const EthereumLogo = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/gochain/info/logo.png'
 
-const getTokenLogoURL = address =>
+const getLogoByName = name =>
+  `https://raw.githubusercontent.com/goswap/cryptocurrency-icons/master/128/color/${name.toLowerCase()}.png`
+
+const getLogoByAddress = address =>
   `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
+
 const NO_LOGO_ADDRESSES: { [tokenAddress: string]: true } = {}
 
 const Image = styled.img<{ size: string }>`
@@ -47,7 +51,7 @@ export default function CurrencyLogo({
   if (currency instanceof Token) {
     let path = ''
     if (!NO_LOGO_ADDRESSES[currency.address]) {
-      path = getTokenLogoURL(currency.address)
+      path = getLogoByName(currency.symbol)
     } else {
       return (
         <Emoji {...rest} size={size}>

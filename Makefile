@@ -1,4 +1,4 @@
-.PHONY run build deploy
+.PHONY: run build deploy
 
 run:
 	yarn start
