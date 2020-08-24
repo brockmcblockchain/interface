@@ -175,7 +175,7 @@ export default function Header() {
         </HeaderControls>
       </RowBetween>
       <div style={{ fontSize: 14, paddingTop: 8 }}>
-        Swap your ERC20s to GoSwap at <a href="https://chainswap.org" target="_blank">ChainSwap.org</a>
+        Swap your ERC20s to <a href="https://gochain.foundation" target="_blank">GoChain</a> at <a href="https://chainswap.org" target="_blank">ChainSwap.org</a>
       </div>
     </HeaderFrame>
   )
