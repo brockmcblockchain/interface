@@ -246,7 +246,7 @@ export default function Swap() {
   if (chainId !== 60) {
     return (
       <div>
-        Please configure your wallet for GoChain. <a href="https://gofs-help.gochain.io/metamask" target="_blank">Click here for instructions</a >.
+        Please configure your wallet for GoChain. <a href="https://help.goswap.exchange/getting-started" target="_blank">Click here for instructions</a >.
       </div>
     )
   }
