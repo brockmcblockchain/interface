@@ -1,12 +1,11 @@
 import { Currency, ETHER, Token } from '@goswap/sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
-
-
-const EthereumLogo = 'https://raw.githubusercontent.com/goswap/cryptocurrency-icons/master/128/color/go.png'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
+
+const EthereumLogo = 'https://raw.githubusercontent.com/goswap/cryptocurrency-icons/master/128/color/go.png'
 
 const getTokenLogoURL = (address: string) =>
   `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`

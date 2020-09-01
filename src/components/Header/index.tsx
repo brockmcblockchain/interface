@@ -16,7 +16,7 @@ import { YellowCard } from '../Card'
 import Settings from '../Settings'
 import Menu from '../Menu'
 
-import Row, { RowBetween } from '../Row'
+import { RowBetween } from '../Row'
 import Web3Status from '../Web3Status'
 
 const HeaderFrame = styled.div`
@@ -59,13 +59,13 @@ const Title = styled.a`
   }
 `
 
-const TitleText = styled(Row)`
-  width: fit-content;
-  white-space: nowrap;
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    display: none;
-  `};
-`
+// const TitleText = styled(Row)`
+//   width: fit-content;
+//   white-space: nowrap;
+//   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+//     display: none;
+//   `};
+// `
 
 const AccountElement = styled.div<{ active: boolean }>`
   display: flex;
@@ -105,8 +105,6 @@ const UniIcon = styled.div`
       width: 100px;
     }
   `};
- 
-  
 `
 
 const HeaderControls = styled.div`
@@ -175,7 +173,14 @@ export default function Header() {
         </HeaderControls>
       </RowBetween>
       <div style={{ fontSize: 14, paddingTop: 8 }}>
-        Swap your ERC20s to <a href="https://gochain.foundation" target="_blank">GoChain</a> at <a href="https://chainswap.org" target="_blank">Chainswap</a>
+        Swap your ERC20s to{' '}
+        <a href="https://gochain.foundation" target="_blank">
+          GoChain
+        </a>{' '}
+        at{' '}
+        <a href="https://chainswap.org" target="_blank">
+          Chainswap
+        </a>
       </div>
     </HeaderFrame>
   )
