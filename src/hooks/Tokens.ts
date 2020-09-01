@@ -1,7 +1,7 @@
 import { parseBytes32String } from '@ethersproject/strings'
-import { ChainId, Currency, ETHER, Token } from '@goswap/sdk'
+import { Currency, ETHER, Token, currencyEquals } from '@goswap/sdk'
 import { useMemo } from 'react'
-import { ALL_TOKENS } from '../constants/tokens'
+import { useSelectedTokenList } from '../state/lists/hooks'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
 import { useUserAddedTokens } from '../state/user/hooks'
 import { isAddress } from '../utils'
@@ -12,6 +12,7 @@ import { useBytes32TokenContract, useTokenContract } from './useContract'
 export function useAllTokens(): { [address: string]: Token } {
   const { chainId } = useActiveWeb3React()
   const userAddedTokens = useUserAddedTokens()
+  const allTokens = useSelectedTokenList()
 
   return useMemo(() => {
     if (!chainId) return {}
@@ -25,10 +26,16 @@ export function useAllTokens(): { [address: string]: Token } {
           },
           // must make a copy because reduce modifies the map, and we do not
           // want to make a copy in every iteration
-          { ...ALL_TOKENS[chainId as ChainId] }
+          { ...allTokens[chainId] }
         )
     )
-  }, [userAddedTokens, chainId])
+  }, [chainId, userAddedTokens, allTokens])
+}
+
+// Check if currency is included in custom list from user storage
+export function useIsUserAddedToken(currency: Currency): boolean {
+  const userAddedTokens = useUserAddedTokens()
+  return !!userAddedTokens.find(token => currencyEquals(currency, token))
 }
 
 // parse a name or symbol from a token response
@@ -37,8 +44,8 @@ function parseStringOrBytes32(str: string | undefined, bytes32: string | undefin
   return str && str.length > 0
     ? str
     : bytes32 && BYTES32_REGEX.test(bytes32)
-      ? parseBytes32String(bytes32)
-      : defaultValue
+    ? parseBytes32String(bytes32)
+    : defaultValue
 }
 
 // undefined if invalid or does not exist

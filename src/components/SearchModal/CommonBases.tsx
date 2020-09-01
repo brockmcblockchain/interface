@@ -30,8 +30,8 @@ export default function CommonBases({
   onSelect,
   selectedCurrency
 }: {
-  chainId: ChainId
-  selectedCurrency?: Currency
+  chainId?: ChainId
+  selectedCurrency?: Currency | null
   onSelect: (currency: Currency) => void
 }) {
   return (
@@ -44,7 +44,11 @@ export default function CommonBases({
       </AutoRow>
       <AutoRow gap="4px">
         <BaseWrapper
-          onClick={() => !currencyEquals(selectedCurrency, ETHER) && onSelect(ETHER)}
+          onClick={() => {
+            if (!selectedCurrency || !currencyEquals(selectedCurrency, ETHER)) {
+              onSelect(ETHER)
+            }
+          }}
           disable={selectedCurrency === ETHER}
         >
           <CurrencyLogo currency={ETHER} style={{ marginRight: 8 }} />
@@ -52,8 +56,8 @@ export default function CommonBases({
             GO
           </Text>
         </BaseWrapper>
-        {(SUGGESTED_BASES[chainId as ChainId] ?? []).map((token: Token) => {
-          const selected = currencyEquals(selectedCurrency, token)
+        {(chainId ? SUGGESTED_BASES[chainId] : []).map((token: Token) => {
+          const selected = selectedCurrency instanceof Token && selectedCurrency.address === token.address
           return (
             <BaseWrapper onClick={() => !selected && onSelect(token)} disable={selected} key={token.address}>
               <CurrencyLogo currency={token} style={{ marginRight: 8 }} />

@@ -10,7 +10,6 @@ import { AppDispatch, AppState } from '../index'
 import {
   addSerializedPair,
   addSerializedToken,
-  dismissTokenWarning,
   removeSerializedToken,
   SerializedPair,
   SerializedToken,
@@ -162,28 +161,6 @@ export function usePairAdder(): (pair: Pair) => void {
 }
 
 /**
- * Returns whether a token warning has been dismissed and a callback to dismiss it,
- * iff it has not already been dismissed and is a valid token.
- */
-export function useTokenWarningDismissal(chainId?: number, token?: Token): [boolean, null | (() => void)] {
-  const dismissalState = useSelector<AppState, AppState['user']['dismissedTokenWarnings']>(
-    state => state.user.dismissedTokenWarnings
-  )
-
-  const dispatch = useDispatch<AppDispatch>()
-
-  return useMemo(() => {
-    if (!chainId || !token) return [false, null]
-
-    const dismissed: boolean = dismissalState?.[chainId]?.[token.address] === true
-
-    const callback = dismissed ? null : () => dispatch(dismissTokenWarning({ chainId, tokenAddress: token.address }))
-
-    return [dismissed, callback]
-  }, [chainId, token, dismissalState, dispatch])
-}
-
-/**
  * Given two tokens return the liquidity token that represents its liquidity shares
  * @param tokenA one of the two tokens
  * @param tokenB the other token
@@ -207,22 +184,22 @@ export function useTrackedTokenPairs(): [Token, Token][] {
     () =>
       chainId
         ? flatMap(Object.keys(tokens), tokenAddress => {
-          const token = tokens[tokenAddress]
-          // for each token on the current chain,
-          return (
-            // loop though all bases on the current chain
-            (BASES_TO_TRACK_LIQUIDITY_FOR[chainId] ?? [])
-              // to construct pairs of the given token with each base
-              .map(base => {
-                if (base.equals(token)) {
-                  return null
-                } else {
-                  return [base, token]
-                }
-              })
-              .filter((p): p is [Token, Token] => p !== null)
-          )
-        })
+            const token = tokens[tokenAddress]
+            // for each token on the current chain,
+            return (
+              // loop though all bases on the current chain
+              (BASES_TO_TRACK_LIQUIDITY_FOR[chainId] ?? [])
+                // to construct pairs of the given token with each base
+                .map(base => {
+                  if (base.address === token.address) {
+                    return null
+                  } else {
+                    return [base, token]
+                  }
+                })
+                .filter((p): p is [Token, Token] => p !== null)
+            )
+          })
         : [],
     [tokens, chainId]
   )

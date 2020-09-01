@@ -123,14 +123,16 @@ export function useV1Trade(
     pairs = [inputPair, outputPair]
   }
 
-  const route = inputCurrency && pairs && pairs.length > 0 && new Route(pairs, inputCurrency)
+  const route = inputCurrency && pairs && pairs.length > 0 && new Route(pairs, inputCurrency, outputCurrency)
   let v1Trade: Trade | undefined
   try {
     v1Trade =
       route && exactAmount
         ? new Trade(route, exactAmount, isExactIn ? TradeType.EXACT_INPUT : TradeType.EXACT_OUTPUT)
         : undefined
-  } catch { }
+  } catch (error) {
+    console.debug('Failed to create V1 trade', error)
+  }
   return v1Trade
 }
 
@@ -165,6 +167,8 @@ export function isTradeBetter(
   tradeB: Trade | undefined,
   minimumDelta: Percent = ZERO_PERCENT
 ): boolean | undefined {
+  if (tradeA && !tradeB) return false
+  if (tradeB && !tradeA) return true
   if (!tradeA || !tradeB) return undefined
 
   if (
