@@ -12,6 +12,7 @@ import { ExternalLink } from '../../theme/components'
 import { getEtherscanLink } from '../../utils'
 import { AutoColumn } from '../Column'
 import { AutoRow } from '../Row'
+import { ChainId } from '@goswap/sdk'
 
 const Fader = styled.div<{ count: number }>`
   position: absolute;
@@ -41,8 +42,9 @@ export default function TxnPopup({
 
   const [isRunning, setIsRunning] = useState(true)
   const removePopup = useRemovePopup()
+  const popKeyParam = popKey ? popKey : ''
 
-  const removeThisPopup = useCallback(() => removePopup(popKey), [popKey, removePopup])
+  const removeThisPopup = useCallback(() => removePopup(popKeyParam), [popKeyParam, removePopup])
 
   useInterval(
     () => {
@@ -55,6 +57,7 @@ export default function TxnPopup({
   const handleMouseLeave = useCallback(() => setIsRunning(true), [])
 
   const theme = useContext(ThemeContext)
+  const chainIdParam = chainId || ChainId.MAINNET
 
   return (
     <AutoRow onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
@@ -63,7 +66,7 @@ export default function TxnPopup({
       </div>
       <AutoColumn gap="8px">
         <TYPE.body fontWeight={500}>{summary ?? 'Hash: ' + hash.slice(0, 8) + '...' + hash.slice(58, 65)}</TYPE.body>
-        <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>View on Explorer</ExternalLink>
+        <ExternalLink href={getEtherscanLink(chainIdParam, hash, 'transaction')}>View on Explorer</ExternalLink>
       </AutoColumn>
       <Fader count={count} />
     </AutoRow>

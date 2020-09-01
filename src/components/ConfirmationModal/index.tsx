@@ -12,6 +12,7 @@ import Circle from '../../assets/images/blue-loader.svg'
 
 import { getEtherscanLink } from '../../utils'
 import { useActiveWeb3React } from '../../hooks'
+import { ChainId } from '@goswap/sdk'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -30,7 +31,7 @@ const ConfirmedIcon = styled(ColumnCenter)`
   padding: 60px 0;
 `
 
-const CustomLightSpinner = styled(Spinner) <{ size: string }>`
+const CustomLightSpinner = styled(Spinner)<{ size: string }>`
   height: ${({ size }) => size};
   width: ${({ size }) => size};
 `
@@ -60,6 +61,7 @@ export default function ConfirmationModal({
   const theme = useContext(ThemeContext)
 
   const transactionBroadcast = !!hash
+  const chainIdParam = chainId || ChainId.MAINNET
 
   // waiting for user to confirm/reject tx _or_ showing info on a tx that has been broadcast
   if (attemptingTxn || transactionBroadcast) {
@@ -75,8 +77,8 @@ export default function ConfirmationModal({
               {transactionBroadcast ? (
                 <ArrowUpCircle strokeWidth={0.5} size={90} color={theme.primary1} />
               ) : (
-                  <CustomLightSpinner src={Circle} alt="loader" size={'90px'} />
-                )}
+                <CustomLightSpinner src={Circle} alt="loader" size={'90px'} />
+              )}
             </ConfirmedIcon>
             <AutoColumn gap="12px" justify={'center'}>
               <Text fontWeight={500} fontSize={20}>
@@ -90,7 +92,7 @@ export default function ConfirmationModal({
 
               {transactionBroadcast ? (
                 <>
-                  <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>
+                  <ExternalLink href={getEtherscanLink(chainIdParam, hash, 'transaction')}>
                     <Text fontWeight={500} fontSize={14} color={theme.primary1}>
                       View on Explorer
                     </Text>
@@ -102,10 +104,10 @@ export default function ConfirmationModal({
                   </ButtonPrimary>
                 </>
               ) : (
-                  <Text fontSize={12} color="#565A69" textAlign="center">
-                    Confirm this transaction in your wallet
-                  </Text>
-                )}
+                <Text fontSize={12} color="#565A69" textAlign="center">
+                  Confirm this transaction in your wallet
+                </Text>
+              )}
             </AutoColumn>
           </Section>
         </Wrapper>
