@@ -34,6 +34,6 @@ export const ALL_TOKENS: AllTokens = [
       [ChainId.GÖRLI]: {},
       [ChainId.ROPSTEN]: {},
       [ChainId.KOVAN]: {},
-      [ChainId.GOCHAIN]: {},
+      [ChainId.GOCHAIN]: {}
     }
   )

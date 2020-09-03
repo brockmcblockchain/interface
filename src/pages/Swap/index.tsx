@@ -97,26 +97,26 @@ export default function Swap() {
   const trade = showWrap
     ? undefined
     : {
-      [Version.v1]: v1Trade,
-      [Version.v2]: v2Trade
-    }[toggledVersion]
+        [Version.v1]: v1Trade,
+        [Version.v2]: v2Trade
+      }[toggledVersion]
 
   const betterTradeLinkVersion: Version | undefined =
     toggledVersion === Version.v2 && isTradeBetter(v2Trade, v1Trade, BETTER_TRADE_LINK_THRESHOLD)
       ? Version.v1
       : toggledVersion === Version.v1 && isTradeBetter(v1Trade, v2Trade)
-        ? Version.v2
-        : undefined
+      ? Version.v2
+      : undefined
 
   const parsedAmounts = showWrap
     ? {
-      [Field.INPUT]: parsedAmount,
-      [Field.OUTPUT]: parsedAmount
-    }
+        [Field.INPUT]: parsedAmount,
+        [Field.OUTPUT]: parsedAmount
+      }
     : {
-      [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
-      [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount
-    }
+        [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
+        [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount
+      }
 
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
   const isValid = !swapInputError
@@ -207,8 +207,8 @@ export default function Swap() {
             recipient === null
               ? 'Swap w/o Send'
               : (recipientAddress ?? recipient) === account
-                ? 'Swap w/o Send + recipient'
-                : 'Swap w/ Send',
+              ? 'Swap w/o Send + recipient'
+              : 'Swap w/ Send',
           label: [
             trade?.inputAmount?.currency?.symbol,
             trade?.outputAmount?.currency?.symbol,
@@ -270,12 +270,15 @@ export default function Swap() {
     onCurrencySelection
   ])
 
-
-  console.log("chainId:", chainId);
+  console.log('chainId:', chainId)
   if (chainId !== 60) {
     return (
       <div>
-        Please configure your wallet for GoChain. <a href="https://help.goswap.exchange/getting-started" target="_blank">Click here for instructions</a >.
+        Please configure your wallet for GoChain.{' '}
+        <a href="https://help.goswap.exchange/getting-started" target="_blank">
+          Click here for instructions
+        </a>
+        .
       </div>
     )
   }
