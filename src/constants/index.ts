@@ -11,8 +11,6 @@ type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
 
-console.log('\n\n --- WETH from goswap sdk: --- \n\n', WETH)
-
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
   [ChainId.ROPSTEN]: [WETH[ChainId.ROPSTEN]],

@@ -196,17 +196,11 @@ export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
  * Returns all the pairs of tokens that are tracked by the user for the current chain ID.
  */
 export function useTrackedTokenPairs(): [Token, Token][] {
-  console.log('\n\n --- useTrackedTokenPairs start --- \n\n')
   const { chainId } = useActiveWeb3React()
-  console.log('chainId:\n', chainId)
   const tokens = useAllTokens()
-  console.log('tokens:\n', tokens)
 
   // pinned pairs
   const pinnedPairs = useMemo(() => (chainId ? PINNED_PAIRS[chainId] ?? [] : []), [chainId])
-  console.log('pinnedPairs:\n', pinnedPairs)
-
-  console.log('BASES_TO_TRACK_LIQUIDITY_FOR:\n', BASES_TO_TRACK_LIQUIDITY_FOR)
 
   // pairs for every token against every base
   const generatedPairs: [Token, Token][] = useMemo(
@@ -214,7 +208,6 @@ export function useTrackedTokenPairs(): [Token, Token][] {
       chainId
         ? flatMap(Object.keys(tokens), tokenAddress => {
             const token = tokens[tokenAddress]
-            console.log(`fiatMap's token:\n`, token)
             // for each token on the current chain,
             return (
               // loop though all bases on the current chain
@@ -224,7 +217,6 @@ export function useTrackedTokenPairs(): [Token, Token][] {
                   if (base.equals(token)) {
                     return null
                   } else {
-                    console.log('paired!:\n', base, token)
                     return [base, token]
                   }
                 })
@@ -234,11 +226,9 @@ export function useTrackedTokenPairs(): [Token, Token][] {
         : [],
     [tokens, chainId]
   )
-  console.log('generatedPairs:\n', generatedPairs)
 
   // pairs saved by users
   const savedSerializedPairs = useSelector<AppState, AppState['user']['pairs']>(({ user: { pairs } }) => pairs)
-  console.log('savedSerializedPairs:\n', savedSerializedPairs)
 
   const userPairs: [Token, Token][] = useMemo(() => {
     if (!chainId || !savedSerializedPairs) return []
@@ -249,16 +239,12 @@ export function useTrackedTokenPairs(): [Token, Token][] {
       return [deserializeToken(forChain[pairId].token0), deserializeToken(forChain[pairId].token1)]
     })
   }, [savedSerializedPairs, chainId])
-  console.log('userPairs:\n', userPairs)
 
   const combinedList = useMemo(() => userPairs.concat(generatedPairs).concat(pinnedPairs), [
     generatedPairs,
     pinnedPairs,
     userPairs
   ])
-  console.log('combinedList:\n', combinedList)
-
-  console.log('\n\n --- useTrackedTokenPairs end --- \n\n')
 
   return useMemo(() => {
     // dedupes pairs of tokens in the combined list
