@@ -23,7 +23,6 @@ import { Dots } from '../../components/swap/styleds'
 
 // import { ChainId, WETH, FACTORY_ADDRESS } from '@goswap/sdk'
 
-
 export default function Pool() {
   const theme = useContext(ThemeContext)
   const { account } = useActiveWeb3React()
@@ -34,9 +33,11 @@ export default function Pool() {
     () => trackedTokenPairs.map(tokens => ({ liquidityToken: toV2LiquidityToken(tokens), tokens })),
     [trackedTokenPairs]
   )
+
   const liquidityTokens = useMemo(() => tokenPairsWithLiquidityTokens.map(tpwlt => tpwlt.liquidityToken), [
     tokenPairsWithLiquidityTokens
   ])
+
   const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
     account ?? undefined,
     liquidityTokens
@@ -52,6 +53,7 @@ export default function Pool() {
   )
 
   const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
+
   const v2IsLoading =
     fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some(V2Pair => !V2Pair)
 
@@ -97,18 +99,15 @@ export default function Pool() {
                 ))}
               </>
             ) : (
-                    <LightCard padding="40px">
-                      <TYPE.body color={theme.text3} textAlign="center">
-                        No liquidity found.
+              <LightCard padding="40px">
+                <TYPE.body color={theme.text3} textAlign="center">
+                  No liquidity found.
                 </TYPE.body>
-                    </LightCard>
-                  )}
-
-
+              </LightCard>
+            )}
           </AutoColumn>
         </AutoColumn>
       </AppBody>
-
     </>
   )
 }
