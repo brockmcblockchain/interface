@@ -23,24 +23,28 @@ import { Dots } from '../../components/swap/styleds'
 
 // import { ChainId, WETH, FACTORY_ADDRESS } from '@goswap/sdk'
 
-
 export default function Pool() {
+  console.log('\n\n --- Pool Start --- \n\n')
   const theme = useContext(ThemeContext)
   const { account } = useActiveWeb3React()
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
+  console.log('trackedTokenPairs:\n', trackedTokenPairs)
   const tokenPairsWithLiquidityTokens = useMemo(
     () => trackedTokenPairs.map(tokens => ({ liquidityToken: toV2LiquidityToken(tokens), tokens })),
     [trackedTokenPairs]
   )
+  console.log('tokenPairsWithLiquidityTokens:\n', tokenPairsWithLiquidityTokens)
   const liquidityTokens = useMemo(() => tokenPairsWithLiquidityTokens.map(tpwlt => tpwlt.liquidityToken), [
     tokenPairsWithLiquidityTokens
   ])
+  console.log('liquidityTokens:\n', liquidityTokens)
   const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
     account ?? undefined,
     liquidityTokens
   )
+  console.log('v2PairsBalances:\n', v2PairsBalances)
 
   // fetch the reserves for all V2 pools in which the user has a balance
   const liquidityTokensWithBalances = useMemo(
@@ -50,12 +54,16 @@ export default function Pool() {
       ),
     [tokenPairsWithLiquidityTokens, v2PairsBalances]
   )
+  console.log('liquidityTokensWithBalances:\n', liquidityTokensWithBalances)
 
   const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
+  console.log('v2Pairs:\n', v2Pairs)
   const v2IsLoading =
     fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some(V2Pair => !V2Pair)
 
   const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
+  console.log('allV2PairsWithLiquidity:\n', allV2PairsWithLiquidity)
+  console.log('\n\n --- Pool end --- \n\n')
 
   // const hasV1Liquidity = useUserHasLiquidityInAllTokens()
 
@@ -97,18 +105,15 @@ export default function Pool() {
                 ))}
               </>
             ) : (
-                    <LightCard padding="40px">
-                      <TYPE.body color={theme.text3} textAlign="center">
-                        No liquidity found.
+              <LightCard padding="40px">
+                <TYPE.body color={theme.text3} textAlign="center">
+                  No liquidity found.
                 </TYPE.body>
-                    </LightCard>
-                  )}
-
-
+              </LightCard>
+            )}
           </AutoColumn>
         </AutoColumn>
       </AppBody>
-
     </>
   )
 }
