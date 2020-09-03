@@ -2,6 +2,7 @@ import { ChainId, JSBI, Percent, Token, WETH } from '@goswap/sdk'
 
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 import { COMP, DAI, MKR, USDC, USDT } from './tokens/mainnet'
+import GOCHAIN_DEFAULT_TOKENS from './tokens/gochain'
 
 export const ROUTER_ADDRESS = '0x3881e447F439891dC106Da7bca0007B319eeB74D'
 
@@ -34,7 +35,8 @@ export const SUGGESTED_BASES: ChainTokenList = {
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
+  [ChainId.GOCHAIN]: [...WETH_ONLY[ChainId.GOCHAIN], ...GOCHAIN_DEFAULT_TOKENS]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
@@ -72,54 +74,54 @@ export const SUPPORTED_WALLETS =
   process.env.REACT_APP_CHAIN_ID !== '1'
     ? TESTNET_CAPABLE_WALLETS
     : {
-      ...TESTNET_CAPABLE_WALLETS,
-      ...{
-        WALLET_CONNECT: {
-          connector: walletconnect,
-          name: 'WalletConnect',
-          iconName: 'walletConnectIcon.svg',
-          description: 'Connect to Trust Wallet, Rainbow Wallet and more...',
-          href: null,
-          color: '#4196FC',
-          mobile: true
-        },
-        WALLET_LINK: {
-          connector: walletlink,
-          name: 'Coinbase Wallet',
-          iconName: 'coinbaseWalletIcon.svg',
-          description: 'Use Coinbase Wallet app on mobile device',
-          href: null,
-          color: '#315CF5'
-        },
-        COINBASE_LINK: {
-          name: 'Open in Coinbase Wallet',
-          iconName: 'coinbaseWalletIcon.svg',
-          description: 'Open in Coinbase Wallet app.',
-          href: 'https://go.cb-w.com/mtUDhEZPy1',
-          color: '#315CF5',
-          mobile: true,
-          mobileOnly: true
-        },
-        FORTMATIC: {
-          connector: fortmatic,
-          name: 'Fortmatic',
-          iconName: 'fortmaticIcon.png',
-          description: 'Login using Fortmatic hosted wallet',
-          href: null,
-          color: '#6748FF',
-          mobile: true
-        },
-        Portis: {
-          connector: portis,
-          name: 'Portis',
-          iconName: 'portisIcon.png',
-          description: 'Login using Portis hosted wallet',
-          href: null,
-          color: '#4A6C9B',
-          mobile: true
+        ...TESTNET_CAPABLE_WALLETS,
+        ...{
+          WALLET_CONNECT: {
+            connector: walletconnect,
+            name: 'WalletConnect',
+            iconName: 'walletConnectIcon.svg',
+            description: 'Connect to Trust Wallet, Rainbow Wallet and more...',
+            href: null,
+            color: '#4196FC',
+            mobile: true
+          },
+          WALLET_LINK: {
+            connector: walletlink,
+            name: 'Coinbase Wallet',
+            iconName: 'coinbaseWalletIcon.svg',
+            description: 'Use Coinbase Wallet app on mobile device',
+            href: null,
+            color: '#315CF5'
+          },
+          COINBASE_LINK: {
+            name: 'Open in Coinbase Wallet',
+            iconName: 'coinbaseWalletIcon.svg',
+            description: 'Open in Coinbase Wallet app.',
+            href: 'https://go.cb-w.com/mtUDhEZPy1',
+            color: '#315CF5',
+            mobile: true,
+            mobileOnly: true
+          },
+          FORTMATIC: {
+            connector: fortmatic,
+            name: 'Fortmatic',
+            iconName: 'fortmaticIcon.png',
+            description: 'Login using Fortmatic hosted wallet',
+            href: null,
+            color: '#6748FF',
+            mobile: true
+          },
+          Portis: {
+            connector: portis,
+            name: 'Portis',
+            iconName: 'portisIcon.png',
+            description: 'Login using Portis hosted wallet',
+            href: null,
+            color: '#4A6C9B',
+            mobile: true
+          }
         }
       }
-    }
 
 export const NetworkContextName = 'NETWORK'
 
