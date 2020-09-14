@@ -1,9 +1,9 @@
-# Uniswap Interface
+# GoSwap Interface
 
 [![Tests](https://github.com/goswap/interface/workflows/Tests/badge.svg)](https://github.com/goswap/interface/actions?query=workflow%3ATests)
 [![Styled With Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io/)
 
-An open source interface for GoSwap -- a protocol for decentralized exchange of Ethereum tokens.
+An open source interface for GoSwap -- a protocol for decentralized exchange of GoChain tokens.
 
 - [goswap.exchange](https://goswap.exchange/)
 - [Docs](https://help.goswap.exchange/)
