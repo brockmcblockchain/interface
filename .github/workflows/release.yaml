@@ -35,9 +35,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
+          registry-url: 'https://npm.pkg.github.com'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the app
         run: yarn build
